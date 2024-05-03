@@ -1,0 +1,20 @@
+{
+  "URL" : "https://demo.nopcommerce.com/",
+
+  "Login" : {
+    "ValidCredentials" :{
+      "email": "Mostafa@mostafa.com" ,
+      "password" : "12345"
+    },
+    "InvalidCredentials" : {
+      "InvalidEmail" : {
+        "email": "Mosad@.com" ,
+        "password" : "12345"
+      },
+      "InvalidPassword" : {
+        "email": "Mostafa@mostafa.com" ,
+        "password" : "123dsds45"
+      }
+    }
+  }
+}
