@@ -19,5 +19,5 @@ public class LoginTests extends BaseTests {
      LoginPage loginPage = homePage.clickOnLoginLink();
      loginPage.loginFeature(dataModel().Login.ValidCredentials.email,
              dataModel().Login.ValidCredentials.password);
-    }v
+    }
 }
