@@ -19,6 +19,7 @@ public class BaseTests {
     @BeforeClass
     public void setUp(){
         driver = new EdgeDriver();
+        driver.manage().window().maximize();
         homePage = new HomePage(driver);
     }
 

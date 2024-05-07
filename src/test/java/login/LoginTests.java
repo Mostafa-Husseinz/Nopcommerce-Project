@@ -13,7 +13,6 @@ public class LoginTests extends BaseTests {
 
 
     @Test
-
     public void successfullyLogin() throws FileNotFoundException {
 
      LoginPage loginPage = homePage.clickOnLoginLink();
