@@ -9,7 +9,6 @@
                     <exclude name="t2"></exclude>
                 </methods>
             </class>
-
         </classes>
     </test>
     <test  name="Edge">
