@@ -54,8 +54,12 @@ public class BaseTests {
 
     @BeforeMethod
     public void goHome(Method method) throws Exception {
+        UtilsTests utilsTests = new UtilsTests(driver);
+
         ScreenRecorderUtil.startRecord(method.getName());
         driver.get(dataModel().URL);
+        utilsTests.createTestCaseInReport(method);
+
     }
     @AfterMethod
     public void afterMethod(Method method, ITestResult result) throws Exception {
@@ -63,6 +67,7 @@ public class BaseTests {
         utilsTests.takeScreenShots(method);
         ScreenRecorderUtil.stopRecord();
         utilsTests.setStatus(method,result);
+
     }
 
     @AfterClass

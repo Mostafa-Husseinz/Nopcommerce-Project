@@ -11,6 +11,7 @@ public class LoginPage extends MethodHandles {
     private final By emailField = By.id("Email");
     private final By passwordField = By.id("Password");
     private final By loginButton = By.cssSelector(".button-1.login-button");
+    private final By validationMessage = By.xpath("//div[@class='message-error validation-summary-errors']");
 
     private void insertEmail(String email){
         sendKeys(emailField,5,email);
@@ -20,6 +21,10 @@ public class LoginPage extends MethodHandles {
     }
     private void clickOnLoginButton(){
         click(loginButton,5);
+    }
+
+    public String getValidationMessage(){
+        return driver.findElement(validationMessage).getText();
     }
 
     public void loginFeature(String email , String password){
