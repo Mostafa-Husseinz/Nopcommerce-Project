@@ -6,14 +6,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
 import pages.HomePage;
 import reader.ReadDataFromJson;
+import utils.ScreenRecorderUtil;
+import utils.UtilsTests;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.lang.reflect.Method;
 
 public class BaseTests {
     WebDriver driver;
@@ -21,6 +23,7 @@ public class BaseTests {
     EdgeOptions edgeOptions;
     protected HomePage homePage;
     private DataModel dataModel;
+    UtilsTests utilsTests;
     @Parameters("browser")
     @BeforeClass
     public void setUp(String browser) {
@@ -48,9 +51,18 @@ public class BaseTests {
 
     }
 
+
     @BeforeMethod
-    public void goHome() throws FileNotFoundException {
+    public void goHome(Method method) throws Exception {
+        ScreenRecorderUtil.startRecord(method.getName());
         driver.get(dataModel().URL);
+    }
+    @AfterMethod
+    public void afterMethod(Method method, ITestResult result) throws Exception {
+        UtilsTests utilsTests = new UtilsTests(driver);
+        utilsTests.takeScreenShots(method);
+        ScreenRecorderUtil.stopRecord();
+        utilsTests.setStatus(method,result);
     }
 
     @AfterClass
@@ -60,6 +72,16 @@ public class BaseTests {
 
     public DataModel dataModel() throws FileNotFoundException {
         return dataModel = new ReadDataFromJson().readJsonFile();
+    }
+    @BeforeSuite
+    public void beforeSuite(){
+        UtilsTests utilsTests = new UtilsTests(driver);
+     utilsTests.createReport();
+    }
+    @AfterSuite
+    public void afterSuite(){
+        utilsTests = new UtilsTests(driver);
+        utilsTests.flushReport();
     }
 
 }
