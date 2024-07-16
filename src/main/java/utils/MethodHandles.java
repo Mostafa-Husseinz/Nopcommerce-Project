@@ -36,16 +36,15 @@ public class MethodHandles {
     }
     protected void click(By locator,int time){
         explicitWait(locator ,time);
-        addBorderToElement(driver,webElement(locator));
         setSteps();
+        addBorderToElement(driver,webElement(locator));
         webElement(locator).click();
 
     }
     protected void sendKeys (By locator,int time,String text){
         explicitWait(locator,time);
-        addBorderToElement(driver,webElement(locator));
-
         setSteps();
+        addBorderToElement(driver,webElement(locator));
         webElement(locator).sendKeys(text);
 
 
@@ -58,8 +57,9 @@ public class MethodHandles {
     }
     protected boolean isDisplayed(By locator , int time){
         explicitWait(locator,time);
-        addBorderToElement(driver,webElement(locator));
         setSteps();
+        addBorderToElement(driver,webElement(locator));
+
         return webElement(locator).isDisplayed();
     }
     public boolean barNotificationsDisplayed(){
